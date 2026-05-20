@@ -14,16 +14,25 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({extended:true}));
 
 // ================= FRONTEND =================
 
-app.use(express.static(path.join(__dirname,"frontend")));
+app.use(
+express.static(
+path.join(__dirname,"frontend")
+)
+);
 
 app.get("/",(req,res)=>{
 
 res.sendFile(
-path.join(__dirname,"frontend","index.html")
+
+path.join(
+__dirname,
+"frontend",
+"index.html"
+)
 
 );
 
@@ -41,9 +50,10 @@ api_secret:"aOGQPAuBMcN5NT-rCCOIyC4s0ic"
 
 });
 
-// ================= CLOUD STORAGE =================
+// ================= STORAGE =================
 
-const storage = new CloudinaryStorage({
+const storage =
+new CloudinaryStorage({
 
 cloudinary,
 
@@ -54,28 +64,18 @@ folder:"notes",
 resource_type:"raw",
 
 public_id:
-
-Date.now()+"-"+
-
+Date.now()+
+"-"+
 file.originalname
-
-.replace(/\s+/g,"-")
 
 })
 
 });
 
-const upload = multer({
+const upload =
+multer({
 
-storage,
-
-limits:{
-
-fileSize:
-
-20*1024*1024
-
-}
+storage
 
 });
 
@@ -89,23 +89,31 @@ mongoose.connect(
 
 .then(()=>{
 
-console.log("MongoDB Connected ✅");
+console.log(
+"MongoDB Connected ✅"
+);
 
 })
 
 .catch((err)=>{
 
-console.log("DB ERROR ❌",err);
+console.log(
+"DB ERROR ❌",
+err
+);
 
 });
 
 // ================= GET NOTES =================
 
-app.get("/notes",async(req,res)=>{
+app.get(
+"/notes",
+async(req,res)=>{
 
 try{
 
-const notes = await Note.find();
+const notes=
+await Note.find();
 
 res.json(notes);
 
@@ -113,13 +121,15 @@ res.json(notes);
 
 catch(err){
 
-res.status(500).json(err);
+res.status(500)
+.json(err);
 
 }
 
-});
+}
+);
 
-// ================= UPLOAD NOTE =================
+// ================= UPLOAD =================
 
 app.post(
 
@@ -131,34 +141,47 @@ async(req,res)=>{
 
 try{
 
-console.log(req.body);
-
-console.log(req.file);
-
 if(!req.file){
 
-return res.status(400).json({
+return res
+.status(400)
+.json({
 
-message:"No PDF Uploaded"
+message:
+"No PDF Uploaded"
 
 });
 
 }
 
-const {title,subject}=req.body;
+const{
 
-const newNote = new Note({
+title,
+
+subject
+
+}=req.body;
+
+const newNote=
+new Note({
 
 title,
 
 subject,
 
 pdfUrl:
-req.file.path
-||
-req.file.secure_url,
 
-fileName:req.file.originalname
+req.file.path.replace(
+
+"/raw/upload/",
+
+"/raw/upload/fl_attachment:false/"
+
+),
+
+fileName:
+
+req.file.originalname
 
 });
 
@@ -166,7 +189,8 @@ await newNote.save();
 
 res.json({
 
-message:"Uploaded Successfully ✅"
+message:
+"Uploaded Successfully ✅"
 
 });
 
@@ -176,9 +200,12 @@ catch(err){
 
 console.log(err);
 
-res.status(500).json({
+res
+.status(500)
+.json({
 
-error:err.message
+error:
+err.message
 
 });
 
@@ -188,7 +215,7 @@ error:err.message
 
 );
 
-// ================= DELETE NOTE =================
+// ================= DELETE =================
 
 app.delete(
 
@@ -206,7 +233,8 @@ req.params.id
 
 res.json({
 
-message:"Deleted ✅"
+message:
+"Deleted ✅"
 
 });
 
@@ -214,7 +242,8 @@ message:"Deleted ✅"
 
 catch(err){
 
-res.status(500).json(err);
+res.status(500)
+.json(err);
 
 }
 
@@ -222,7 +251,7 @@ res.status(500).json(err);
 
 );
 
-// ================= DOWNLOAD COUNT =================
+// ================= DOWNLOAD =================
 
 app.post(
 
@@ -286,7 +315,11 @@ process.env.PORT||
 
 3000;
 
-app.listen(PORT,()=>{
+app.listen(
+
+PORT,
+
+()=>{
 
 console.log(
 
@@ -294,4 +327,6 @@ console.log(
 
 );
 
-});
+}
+
+);
