@@ -7,229 +7,81 @@
 
 <meta
 name="viewport"
-content="width=device-width,initial-scale=1.0">
+content="width=device-width, initial-scale=1.0">
 
-<title>NoteShare ⚡</title>
+<title>PDF Viewer ⚡</title>
 
 <link
-href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap"
 rel="stylesheet">
 
 <style>
 
 *{
+
 margin:0;
 padding:0;
 box-sizing:border-box;
 font-family:Poppins,sans-serif;
+
 }
 
 body{
 
 background:
 radial-gradient(circle at top left,#00ffee22,transparent 30%),
-radial-gradient(circle at bottom right,#9d00ff22,transparent 30%),
+radial-gradient(circle at bottom right,#b700ff22,transparent 30%),
 #030712;
 
 color:white;
-min-height:100vh;
-padding:40px;
-overflow-x:hidden;
+
+height:100vh;
+
+overflow:hidden;
 
 }
 
-/* NAV */
+/* NAVBAR */
 
 .nav{
 
+padding:15px 20px;
+
 display:flex;
+
 justify-content:space-between;
+
 align-items:center;
 
-padding:25px;
+background:rgba(255,255,255,.05);
 
-border-radius:25px;
+backdrop-filter:blur(18px);
 
-background:
-rgba(255,255,255,.05);
+border-bottom:
 
-backdrop-filter:blur(20px);
-
-border:
 1px solid rgba(255,255,255,.08);
-
-margin-bottom:40px;
 
 }
 
 .logo{
 
-font-size:32px;
+font-size:28px;
+
 font-weight:800;
 
 background:
-linear-gradient(
-90deg,
-cyan,
-violet
-);
 
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-
-}
-
-/* HERO */
-
-.hero{
-
-text-align:center;
-
-margin-bottom:50px;
-
-}
-
-.hero h1{
-
-font-size:70px;
-
-background:
 linear-gradient(
 90deg,
 #00ffee,
-#70a5ff,
-#ff6ddf
+#8a6dff
 );
 
 -webkit-background-clip:text;
+
 -webkit-text-fill-color:transparent;
 
 }
-
-.hero p{
-
-opacity:.7;
-margin-top:10px;
-
-}
-
-#clock{
-
-margin-top:15px;
-opacity:.6;
-
-}
-
-/* SEARCH */
-
-.search{
-
-display:flex;
-justify-content:center;
-margin-top:25px;
-
-}
-
-.search input{
-
-width:500px;
-
-padding:18px;
-
-border:none;
-outline:none;
-
-border-radius:20px;
-
-background:
-rgba(255,255,255,.06);
-
-color:white;
-
-font-size:16px;
-
-}
-
-/* NOTES */
-
-.notes{
-
-display:grid;
-
-grid-template-columns:
-repeat(
-auto-fit,
-minmax(320px,1fr)
-);
-
-gap:30px;
-
-margin-top:40px;
-
-}
-
-/* CARD */
-
-.card{
-
-background:
-rgba(255,255,255,.05);
-
-backdrop-filter:
-blur(25px);
-
-border:
-1px solid rgba(
-255,
-255,
-255,
-0.08
-);
-
-padding:28px;
-
-border-radius:28px;
-
-transition:.35s;
-
-box-shadow:
-0 0 25px #00ffff22;
-
-}
-
-.card:hover{
-
-transform:
-translateY(-10px);
-
-box-shadow:
-0 0 40px cyan;
-
-}
-
-.card h2{
-
-margin-bottom:12px;
-
-}
-
-.subject{
-
-opacity:.7;
-
-margin-bottom:12px;
-
-}
-
-.downloads{
-
-color:#00ffee;
-
-margin-bottom:18px;
-
-}
-
-/* BUTTONS */
 
 .buttons{
 
@@ -241,136 +93,74 @@ flex-wrap:wrap;
 
 }
 
-.btn{
+button{
 
-padding:12px 16px;
+padding:10px 15px;
 
 border:none;
 
-border-radius:14px;
+border-radius:12px;
 
 cursor:pointer;
 
+font-size:14px;
+
 font-weight:700;
+
+background:
+
+rgba(
+255,
+255,
+255,
+0.08
+);
+
+color:white;
 
 transition:.3s;
 
-text-decoration:none;
+}
 
-display:inline-block;
+button:hover{
+
+transform:translateY(-2px);
+
+box-shadow:
+
+0 0 15px cyan;
 
 }
 
-.open{
+#viewer{
 
-background:#00ffee22;
+width:100%;
 
-border:1px solid cyan;
+height:
 
-color:cyan;
+calc(100vh - 70px);
 
-}
+border:none;
 
-.download{
-
-background:#1f9dff22;
-
-border:1px solid #1f9dff;
-
-color:#8fd9ff;
-
-}
-
-.delete{
-
-background:#ff2d5522;
-
-border:1px solid #ff2d55;
-
-color:#ff89a1;
-
-}
-
-.btn:hover{
-
-transform:
-translateY(-4px);
-
-}
-
-.empty{
-
-opacity:.6;
-
-text-align:center;
-
-padding:40px;
+background:white;
 
 }
 
 /* MOBILE */
 
-@media(max-width:768px){
-
-body{
-
-padding:18px;
-
-}
-
-.nav{
-
-flex-direction:column;
-
-gap:15px;
-
-text-align:center;
-
-}
+@media(max-width:700px){
 
 .logo{
 
-font-size:25px;
+font-size:22px;
 
 }
 
-.hero h1{
+button{
 
-font-size:40px;
+font-size:12px;
 
-}
-
-.hero p{
-
-font-size:14px;
-
-}
-
-.search input{
-
-width:100%;
-
-font-size:15px;
-
-}
-
-.notes{
-
-grid-template-columns:1fr;
-
-}
-
-.buttons{
-
-flex-direction:column;
-
-}
-
-.btn{
-
-width:100%;
-
-text-align:center;
+padding:8px 10px;
 
 }
 
@@ -390,178 +180,17 @@ text-align:center;
 
 </div>
 
-<div>
-
-Browse Notes
-
-</div>
-
-</div>
-
-<div class="hero">
-
-<h1>
-
-Your Notes ⚡
-
-</h1>
-
-<p>
-
-Browse uploaded study materials
-
-</p>
-
-<div id="clock"></div>
-
-<div class="search">
-
-<input
-id="search"
-placeholder="🔍 Search Notes..."
-oninput="filterNotes()">
-
-</div>
-
-</div>
-
-<div
-class="notes"
-id="notes">
-
-</div>
-
-<script>
-
-const API=
-"https://noteshare-o50k.onrender.com";
-
-let allNotes=[];
-
-function updateClock(){
-
-document
-.getElementById(
-"clock"
-)
-.innerHTML=
-new Date()
-.toLocaleString();
-
-}
-
-setInterval(
-updateClock,
-1000
-);
-
-updateClock();
-
-async function getNotes(){
-
-const res=
-
-await fetch(
-API+"/notes"
-);
-
-allNotes=
-
-await res.json();
-
-renderNotes(
-allNotes
-);
-
-}
-
-function renderNotes(notes){
-
-const div=
-
-document
-.getElementById(
-"notes"
-);
-
-div.innerHTML="";
-
-if(!notes.length){
-
-div.innerHTML=
-"<div class='empty'>No Notes Found</div>";
-
-return;
-
-}
-
-notes.forEach(note=>{
-
-div.innerHTML+=`
-
-<div class="card">
-
-<h2>
-
-📘 ${note.title}
-
-</h2>
-
-<div class="subject">
-
-${note.subject}
-
-</div>
-
-<div class="downloads">
-
-⬇ ${note.downloads||0}
-downloads
-
-</div>
-
 <div class="buttons">
 
-<a
-
-class="btn open"
-
-href=
-"viewer.html?pdf=${encodeURIComponent(note.pdfUrl)}"
-
->
-
-👁 Open
-
-</a>
-
-<a
-
-class="btn download"
-
-href="${note.pdfUrl}"
-
-download="${note.fileName}"
-
-onclick=
-"downloadCount('${note._id}')"
-
->
+<button onclick="downloadPDF()">
 
 📥 Download
 
-</a>
+</button>
 
-<button
+<button onclick="goBack()">
 
-class="btn delete"
-
-onclick=
-"deleteNote('${note._id}')"
-
->
-
-Delete
+⬅ Back
 
 </button>
 
@@ -569,88 +198,51 @@ Delete
 
 </div>
 
-`;
+<iframe
+id="viewer">
+</iframe>
 
-});
+<script>
 
-}
-
-function filterNotes(){
-
-const value=
-
-document
-.getElementById(
-"search"
-)
-.value
-.toLowerCase();
-
-const filtered=
-
-allNotes.filter(
-
-n=>
-
-n.title
-.toLowerCase()
-.includes(value)
-
-||
-
-n.subject
-.toLowerCase()
-.includes(value)
-
+const params =
+new URLSearchParams(
+window.location.search
 );
 
-renderNotes(
-filtered
+const pdfUrl =
+params.get("pdf");
+
+const viewer =
+document.getElementById(
+"viewer"
+);
+
+if(pdfUrl){
+
+viewer.src=pdfUrl;
+
+}else{
+
+alert(
+"PDF not found"
 );
 
 }
 
-async function deleteNote(id){
+function downloadPDF(){
 
-await fetch(
-
-API+
-"/delete-note/"
-+id,
-
-{
-
-method:
-"DELETE"
-
-}
-
-);
-
-getNotes();
-
-}
-
-function downloadCount(id){
-
-fetch(
-
-API+
-"/download/"
-+id,
-
-{
-
-method:
-"POST"
-
-}
-
+window.open(
+pdfUrl,
+"_blank"
 );
 
 }
 
-getNotes();
+function goBack(){
+
+history.back();
+
+}
 
 </script>
 
