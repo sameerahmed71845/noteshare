@@ -686,23 +686,47 @@ status.innerHTML =
 
 try{
 
+const API =
+"https://noteshare-o50k.onrender.com";
+
 const res =
 await fetch(
-"http://localhost:3000/upload-note",
+
+`${API}/upload-note`,
+
 {
 method:"POST",
 body:formData
-});
+}
+
+);
 
 const data =
 await res.json();
 
+if(!res.ok){
+
+throw new Error(
+data.error ||
+"Upload Failed"
+);
+
+}
+
 status.innerHTML =
 "✅ Note Uploaded Successfully";
 
-document.getElementById("uploadForm").reset();
+document
+.getElementById(
+"uploadForm"
+)
+.reset();
 
-document.getElementById("fileName").innerHTML =
+document
+.getElementById(
+"fileName"
+)
+innerHTML =
 "No file selected";
 
 }
@@ -714,9 +738,6 @@ status.innerHTML =
 "❌ Upload Failed";
 
 }
-
-});
-
 </script>
 
 </body>
