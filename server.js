@@ -51,25 +51,39 @@ app.get("/notes", async (req, res) => {
 
 // UPLOAD NOTE
 app.post("/upload-note", upload.single("pdf"), async (req, res) => {
-  try {
-    const { title, subject } = req.body;
+ try {
 
-    const newNote = new Note({
-      title,
-      subject,
-      pdfUrl: req.file.path,
-      fileName: req.file.originalname   // 👈 ADD THIS
-    });
+   if (!req.file) {
+     return res.status(400).json({
+       message: "No PDF uploaded"
+     });
+   }
 
-    await newNote.save();
+   const { title, subject } = req.body;
 
-    res.json({ message: "Uploaded ✅" });
+   const newNote = new Note({
+     title,
+     subject,
+     pdfUrl: req.file.path,
+     fileName: req.file.originalname
+   });
 
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+   await newNote.save();
 
+   res.json({
+     message: "Uploaded Successfully ✅"
+   });
+
+ } catch (err) {
+
+   console.log(err); // ADD THIS
+
+   res.status(500).json({
+     error: err.message
+   });
+
+ }
+}
 // DELETE NOTE
 app.delete("/delete-note/:id", async (req, res) => {
   await Note.findByIdAndDelete(req.params.id);
