@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>NoteShare ⚡</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    min-height:100vh;
+
+    overflow-x:hidden;
+    overflow-y:auto;
+
+    background:
+    radial-gradient(circle at top left,#00ffe11f,transparent 30%),
+    radial-gradient(circle at bottom right,#b700ff22,transparent 30%),
+    #030712;
+
+    color:white;
+
+    position:relative;
+}
+
+/* GRID */
+
+body::before{
+
+    content:'';
+
+    position:fixed;
+
+    width:100%;
+    height:100%;
+
+    background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);
+
+    background-size:40px 40px;
+
+    z-index:-2;
+}
+
+/* CURSOR */
+
+.cursor{
+
+    width:22px;
+    height:22px;
+
+    border-radius:50%;
+
+    background:rgba(0,255,255,0.8);
+
+    position:fixed;
+
+    pointer-events:none;
+
+    transform:translate(-50%,-50%);
+
+    mix-blend-mode:screen;
+
+    box-shadow:
+    0 0 20px cyan,
+    0 0 40px cyan;
+
+    z-index:9999;
+}
+
+/* PARTICLES */
+
+.particles span{
+
+    position:absolute;
+
+    width:4px;
+    height:4px;
+
+    background:#00f7ff;
+
+    border-radius:50%;
+
+    animation:float 10s linear infinite;
+
+    opacity:0.7;
+}
+
+@keyframes float{
+
+    0%{
+        transform:translateY(0px);
+    }
+
+    100%{
+        transform:translateY(-100vh);
+    }
+}
+
+/* CONTAINER */
+
+.container{
+    width:100%;
+    padding:40px 8%;
+}
+
+/* NAVBAR */
+
+.navbar{
+
+    width:100%;
+
+    padding:22px 40px;
+
+    border-radius:30px;
+
+    backdrop-filter:blur(18px);
+
+    background:rgba(255,255,255,0.04);
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    box-shadow:0 0 30px rgba(0,255,255,0.08);
+}
+
+.logo{
+
+    font-size:2rem;
+
+    font-weight:700;
+
+    background:linear-gradient(to right,#00f5ff,#c26bff);
+
+    -webkit-background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+}
+
+.nav-links{
+
+    display:flex;
+
+    gap:35px;
+}
+
+.nav-links a{
+
+    color:white;
+
+    text-decoration:none;
+
+    transition:0.3s;
+}
+
+.nav-links a:hover{
+    color:#00f5ff;
+}
+
+/* HERO */
+
+.hero{
+
+    min-height:85vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+}
+
+.hero h1{
+
+    font-size:6rem;
+
+    font-weight:800;
+
+    line-height:1;
+
+    background:linear-gradient(to right,#00ffe7,#6ea8ff,#ff7ad9);
+
+    -webkit-background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+
+    margin-bottom:20px;
+}
+
+.hero p{
+
+    max-width:850px;
+
+    font-size:1.2rem;
+
+    line-height:1.8;
+
+    opacity:0.8;
+}
+
+/* CLOCK */
+
+#clock{
+
+    margin-top:20px;
+
+    opacity:0.7;
+
+    font-size:1rem;
+
+    letter-spacing:2px;
+}
+
+/* BUTTONS */
+
+.btns{
+
+    margin-top:45px;
+
+    display:flex;
+
+    gap:25px;
+
+    flex-wrap:wrap;
+
+    justify-content:center;
+}
+
+.btn{
+
+    padding:18px 38px;
+
+    border-radius:18px;
+
+    border:none;
+
+    cursor:pointer;
+
+    font-size:1rem;
+
+    font-weight:600;
+
+    text-decoration:none;
+
+    transition:0.4s;
+}
+
+.upload-btn{
+
+    background:#00ffee22;
+
+    border:1px solid #00ffee88;
+
+    color:#00ffee;
+
+    box-shadow:0 0 25px #00ffee33;
+}
+
+.browse-btn{
+
+    background:#c26bff22;
+
+    border:1px solid #c26bff88;
+
+    color:#f3d2ff;
+
+    box-shadow:0 0 25px #c26bff33;
+}
+
+.btn:hover{
+
+    transform:translateY(-6px) scale(1.03);
+}
+
+/* FEATURES */
+
+.stats{
+
+    margin-top:100px;
+
+    width:100%;
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+    gap:35px;
+}
+
+.card{
+
+    padding:45px 30px;
+
+    border-radius:30px;
+
+    backdrop-filter:blur(18px);
+
+    background:rgba(255,255,255,0.04);
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    transition:0.5s;
+
+    text-align:center;
+
+    overflow:hidden;
+
+    position:relative;
+}
+
+.card::before{
+
+    content:'';
+
+    position:absolute;
+
+    width:150px;
+    height:150px;
+
+    background:#00ffee22;
+
+    border-radius:50%;
+
+    top:-60px;
+    right:-60px;
+
+    filter:blur(40px);
+}
+
+.card:hover{
+
+    transform:translateY(-12px);
+
+    box-shadow:0 0 40px rgba(0,255,255,0.18);
+}
+
+.card .emoji{
+    font-size:3rem;
+}
+
+.card h2{
+
+    margin-top:15px;
+
+    font-size:2rem;
+}
+
+.card p{
+
+    margin-top:12px;
+
+    opacity:0.8;
+
+    line-height:1.7;
+}
+
+/* FOOTER */
+
+.footer{
+
+    margin-top:100px;
+
+    text-align:center;
+
+    opacity:0.6;
+
+    padding-bottom:40px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+    .hero h1{
+        font-size:4rem;
+    }
+
+    .navbar{
+
+        flex-direction:column;
+
+        gap:20px;
+    }
+
+    .nav-links{
+        gap:18px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- CURSOR -->
+
+<div class="cursor"></div>
+
+<!-- PARTICLES -->
+
+<div class="particles">
+
+<span style="left:5%; top:90%; animation-duration:12s;"></span>
+
+<span style="left:15%; top:80%; animation-duration:15s;"></span>
+
+<span style="left:30%; top:95%; animation-duration:10s;"></span>
+
+<span style="left:45%; top:88%; animation-duration:17s;"></span>
+
+<span style="left:60%; top:92%; animation-duration:11s;"></span>
+
+<span style="left:75%; top:85%; animation-duration:16s;"></span>
+
+<span style="left:90%; top:95%; animation-duration:13s;"></span>
+
+</div>
+
+<div class="container">
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+<div class="logo">
+⚡ NoteShare
+</div>
+
+<div class="nav-links">
+
+<a href="index.html">Home</a>
+
+<a href="upload.html">Upload</a>
+
+<a href="notes.html">Browse</a>
+
+</div>
+
+</div>
+
+<!-- HERO -->
+
+<div class="hero">
+
+<h1>
+NoteShare ⚡
+</h1>
+
+<p>
+The futuristic platform to upload, explore and manage study notes with a premium cyberpunk glassmorphism experience.
+</p>
+
+<div id="clock"></div>
+
+<div class="btns">
+
+<a href="upload.html" class="btn upload-btn">
+📤 Upload Notes
+</a>
+
+<a href="notes.html" class="btn browse-btn">
+📚 Browse Notes
+</a>
+
+</div>
+
+<!-- CARDS -->
+
+<div class="stats">
+
+<div class="card">
+
+<div class="emoji">
+⚡
+</div>
+
+<h2>
+Fast Uploads
+</h2>
+
+<p>
+Upload your notes instantly with smooth cloud-powered storage.
+</p>
+
+</div>
+
+<div class="card">
+
+<div class="emoji">
+🔥
+</div>
+
+<h2>
+Trending Notes
+</h2>
+
+<p>
+Discover the most downloaded and useful study materials.
+</p>
+
+</div>
+
+<div class="card">
+
+<div class="emoji">
+🧠
+</div>
+
+<h2>
+Smart Learning
+</h2>
+
+<p>
+Organize your study journey with futuristic note management.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="footer">
+Made with ⚡ by Sameer
+</div>
+
+</div>
+
+<script>
+
+/* CLOCK */
+
+function updateClock(){
+
+    const now = new Date();
+
+    const date = now.toLocaleDateString();
+
+    const time = now.toLocaleTimeString();
+
+    document.getElementById("clock").innerHTML =
+    `${date} • ${time}`;
+}
+
+setInterval(updateClock,1000);
+
+updateClock();
+
+/* CURSOR */
+
+const cursor =
+document.querySelector(".cursor");
+
+document.addEventListener("mousemove",(e)=>{
+
+    cursor.style.left =
+    e.clientX + "px";
+
+    cursor.style.top =
+    e.clientY + "px";
+
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<title>
+PDF Viewer ⚡
+</title>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap"
+rel="stylesheet">
+
+<style>
+
+*{
+
+margin:0;
+padding:0;
+
+box-sizing:border-box;
+
+font-family:Poppins,sans-serif;
+
+}
+
+body{
+
+background:
+
+radial-gradient(
+circle at top left,
+#00ffee22,
+transparent 30%
+),
+
+radial-gradient(
+circle at bottom right,
+#b700ff22,
+transparent 30%
+),
+
+#030712;
+
+color:white;
+
+min-height:100vh;
+
+overflow:hidden;
+
+}
+
+/* NAVBAR */
+
+.nav{
+
+padding:18px 25px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+background:
+
+rgba(
+255,
+255,
+255,
+0.05
+);
+
+backdrop-filter:
+
+blur(18px);
+
+border-bottom:
+
+1px solid rgba(
+255,
+255,
+255,
+0.08
+);
+
+box-shadow:
+
+0 0 20px rgba(
+0,
+255,
+255,
+0.1
+);
+
+}
+
+.logo{
+
+font-size:32px;
+
+font-weight:800;
+
+background:
+
+linear-gradient(
+90deg,
+#00ffee,
+#8a6dff
+);
+
+-webkit-background-clip:text;
+
+-webkit-text-fill-color:transparent;
+
+}
+
+/* BUTTONS */
+
+.buttons{
+
+display:flex;
+
+gap:12px;
+
+flex-wrap:wrap;
+
+}
+
+button{
+
+padding:12px 18px;
+
+border:none;
+
+border-radius:15px;
+
+cursor:pointer;
+
+font-weight:700;
+
+font-size:15px;
+
+background:
+
+rgba(
+255,
+255,
+255,
+0.08
+);
+
+color:white;
+
+transition:.3s;
+
+}
+
+button:hover{
+
+transform:
+
+translateY(-3px);
+
+box-shadow:
+
+0 0 15px cyan;
+
+}
+
+/* PDF AREA */
+
+#viewer{
+
+width:100%;
+
+height:
+
+calc(100vh - 80px);
+
+border:none;
+
+background:white;
+
+transform-origin:top left;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="nav">
+
+<div class="logo">
+
+⚡ NoteShare
+
+</div>
+
+<div class="buttons">
+
+<button
+onclick="zoomOut()">
+
+➖ Zoom
+
+</button>
+
+<button
+onclick="zoomIn()">
+
+➕ Zoom
+
+</button>
+
+<button
+onclick="downloadPDF()">
+
+📥 Download
+
+</button>
+
+<button
+onclick="goBack()">
+
+⬅ Back
+
+</button>
+
+</div>
+
+</div>
+
+<iframe
+id="viewer">
+</iframe>
+
+<script>
+
+const params=
+
+new URLSearchParams(
+window.location.search
+);
+
+const pdfUrl=
+
+params.get("pdf");
+
+const viewer=
+
+document.getElementById(
+"viewer"
+);
+
+/* FIXED PDF VIEW */
+
+viewer.src=
+
+`https://docs.google.com/gview?embedded=true&url=${encodeURIComponent(pdfUrl)}`;
+
+let zoom=100;
+
+function zoomIn(){
+
+zoom+=20;
+
+viewer.style.zoom=
+
+zoom+"%";
+
+}
+
+function zoomOut(){
+
+if(zoom>40){
+
+zoom-=20;
+
+viewer.style.zoom=
+
+zoom+"%";
+
+}
+
+}
+
+function downloadPDF(){
+
+window.open(
+pdfUrl,
+"_blank"
+);
+
+}
+
+function goBack(){
+
+history.back();
+
+}
+
+</script>
+
+</body>
+
+</html>
