@@ -1,456 +1,302 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
 
-<title>Upload Notes ⚡</title>
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1.0">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<title>
+Upload Notes ⚡
+</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap"
+rel="stylesheet">
 
 <style>
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
-}
 
-html{
-    scroll-behavior:smooth;
+margin:0;
+padding:0;
+
+box-sizing:border-box;
+
+font-family:Poppins,sans-serif;
+
 }
 
 body{
 
-    min-height:100vh;
+background:
+#030712;
 
-    overflow-x:hidden;
-    overflow-y:auto;
+background-image:
 
-    background:
-    radial-gradient(circle at top left,#00ffe11f,transparent 30%),
-    radial-gradient(circle at bottom right,#b700ff22,transparent 30%),
-    #030712;
+linear-gradient(
+rgba(255,255,255,0.03) 1px,
+transparent 1px
+),
 
-    color:white;
+linear-gradient(
+90deg,
+rgba(255,255,255,0.03) 1px,
+transparent 1px
+);
 
-    position:relative;
+background-size:40px 40px;
+
+color:white;
+
+min-height:100vh;
+
+overflow-x:hidden;
+
 }
-
-/* GRID */
-
-body::before{
-
-    content:'';
-
-    position:fixed;
-
-    width:100%;
-    height:100%;
-
-    background-image:
-    linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);
-
-    background-size:40px 40px;
-
-    z-index:-2;
-}
-
-/* CURSOR */
-
-.cursor{
-
-    width:22px;
-    height:22px;
-
-    border-radius:50%;
-
-    background:rgba(0,255,255,0.8);
-
-    position:fixed;
-
-    pointer-events:none;
-
-    transform:translate(-50%,-50%);
-
-    mix-blend-mode:screen;
-
-    box-shadow:
-    0 0 20px cyan,
-    0 0 40px cyan;
-
-    z-index:9999;
-}
-
-/* PARTICLES */
-
-.particles span{
-
-    position:absolute;
-
-    width:4px;
-    height:4px;
-
-    background:#00f7ff;
-
-    border-radius:50%;
-
-    animation:float 10s linear infinite;
-
-    opacity:0.7;
-}
-
-@keyframes float{
-
-    0%{
-        transform:translateY(0px);
-    }
-
-    100%{
-        transform:translateY(-100vh);
-    }
-}
-
-/* CONTAINER */
 
 .container{
-    width:100%;
-    padding:40px 8%;
+
+max-width:700px;
+
+margin:auto;
+
+padding:25px;
+
 }
 
-/* NAVBAR */
+.card{
 
-.navbar{
+margin-top:40px;
 
-    width:100%;
+padding:35px;
 
-    padding:22px 40px;
+background:
 
-    border-radius:30px;
+rgba(255,255,255,0.04);
 
-    backdrop-filter:blur(18px);
+border:
 
-    background:rgba(255,255,255,0.04);
+1px solid rgba(
+255,
+255,
+255,
+0.08
+);
 
-    border:1px solid rgba(255,255,255,0.08);
+backdrop-filter:
 
-    display:flex;
+blur(18px);
 
-    justify-content:space-between;
+border-radius:30px;
 
-    align-items:center;
+box-shadow:
 
-    box-shadow:0 0 30px rgba(0,255,255,0.08);
+0 0 30px rgba(
+0,
+255,
+255,
+0.08
+);
+
 }
 
-.logo{
+h1{
 
-    font-size:2rem;
+text-align:center;
 
-    font-weight:700;
+margin-bottom:10px;
 
-    background:linear-gradient(to right,#00f5ff,#c26bff);
+font-size:38px;
 
-    -webkit-background-clip:text;
+background:
 
-    -webkit-text-fill-color:transparent;
+linear-gradient(
+90deg,
+cyan,
+violet
+);
+
+-webkit-background-clip:text;
+
+-webkit-text-fill-color:transparent;
+
 }
 
-.nav-links{
+p{
 
-    display:flex;
+text-align:center;
 
-    gap:35px;
+opacity:.8;
+
+margin-bottom:25px;
+
 }
 
-.nav-links a{
+label{
 
-    color:white;
+display:block;
 
-    text-decoration:none;
+margin-bottom:10px;
 
-    transition:0.3s;
+font-size:18px;
+
 }
 
-.nav-links a:hover{
-    color:#00f5ff;
+input{
+
+width:100%;
+
+padding:18px;
+
+border:none;
+
+outline:none;
+
+border-radius:18px;
+
+background:
+
+rgba(
+255,
+255,
+255,
+0.06
+);
+
+color:white;
+
+margin-bottom:22px;
+
+font-size:16px;
+
 }
 
-/* HERO */
+.fileBox{
 
-.hero{
+padding:50px;
 
-    min-height:85vh;
+border:
 
-    display:flex;
+2px dashed rgba(
+255,
+255,
+255,
+0.12
+);
 
-    justify-content:center;
+border-radius:25px;
 
-    align-items:center;
+text-align:center;
 
-    padding:50px 0;
+cursor:pointer;
+
+transition:.3s;
+
 }
 
-/* CARD */
+.fileBox:hover{
 
-.upload-card{
+border-color:
 
-    width:100%;
+cyan;
 
-    max-width:720px;
-
-    padding:50px;
-
-    border-radius:35px;
-
-    backdrop-filter:blur(18px);
-
-    background:rgba(255,255,255,0.04);
-
-    border:1px solid rgba(255,255,255,0.08);
-
-    box-shadow:0 0 40px rgba(0,255,255,0.1);
-
-    position:relative;
-
-    overflow:hidden;
 }
 
-.upload-card::before{
+#pdf{
 
-    content:'';
+display:none;
 
-    position:absolute;
-
-    width:220px;
-    height:220px;
-
-    background:#00ffee22;
-
-    border-radius:50%;
-
-    top:-80px;
-    right:-80px;
-
-    filter:blur(50px);
 }
 
-.upload-card h1{
+#fileName{
 
-    text-align:center;
+margin-top:18px;
 
-    font-size:3.5rem;
+color:cyan;
 
-    margin-bottom:15px;
+word-break:break-word;
 
-    background:linear-gradient(to right,#00ffe7,#6ea8ff,#ff7ad9);
-
-    -webkit-background-clip:text;
-
-    -webkit-text-fill-color:transparent;
 }
 
-.upload-card p{
+button{
 
-    text-align:center;
+width:100%;
 
-    opacity:0.8;
+padding:18px;
 
-    margin-bottom:40px;
+margin-top:25px;
 
-    line-height:1.8;
+border:none;
+
+border-radius:18px;
+
+background:
+
+linear-gradient(
+90deg,
+#00ffee,
+#00a6ff
+);
+
+color:black;
+
+font-weight:700;
+
+font-size:18px;
+
+cursor:pointer;
+
 }
 
-/* CLOCK */
+button:hover{
 
-#clock{
+opacity:.9;
 
-    text-align:center;
-
-    margin-bottom:30px;
-
-    opacity:0.7;
-
-    letter-spacing:2px;
 }
 
-/* INPUTS */
+#status{
 
-.input-box{
-    margin-bottom:28px;
+text-align:center;
+
+margin-top:20px;
+
+font-size:18px;
+
 }
-
-.input-box label{
-
-    display:block;
-
-    margin-bottom:10px;
-
-    color:#cfcfcf;
-}
-
-.input-box input{
-
-    width:100%;
-
-    padding:18px 20px;
-
-    border:none;
-
-    outline:none;
-
-    border-radius:18px;
-
-    background:rgba(255,255,255,0.05);
-
-    border:1px solid rgba(255,255,255,0.08);
-
-    color:white;
-
-    font-size:1rem;
-
-    transition:0.4s;
-}
-
-.input-box input:focus{
-
-    border:1px solid #00ffee;
-
-    box-shadow:0 0 20px #00ffee44;
-}
-
-/* FILE BOX */
-
-.file-box{
-
-    border:2px dashed rgba(255,255,255,0.15);
-
-    padding:40px;
-
-    border-radius:25px;
-
-    text-align:center;
-
-    cursor:pointer;
-
-    background:rgba(255,255,255,0.03);
-
-    transition:0.4s;
-}
-
-.file-box:hover{
-
-    border-color:#00ffee;
-
-    box-shadow:0 0 25px #00ffee33;
-}
-
-.file-box input{
-    display:none;
-}
-
-.file-box h3{
-    margin-top:15px;
-}
-
-.file-name{
-
-    margin-top:15px;
-
-    color:#00ffee;
-
-    font-size:0.95rem;
-}
-
-/* BUTTON */
-
-.upload-btn{
-
-    width:100%;
-
-    margin-top:35px;
-
-    padding:18px;
-
-    border:none;
-
-    border-radius:18px;
-
-    cursor:pointer;
-
-    font-size:1.1rem;
-
-    font-weight:700;
-
-    color:white;
-
-    background:linear-gradient(135deg,#00f7ff33,#00ffae33);
-
-    border:1px solid #00ffee88;
-
-    box-shadow:0 0 25px #00ffee33;
-
-    transition:0.4s;
-}
-
-.upload-btn:hover{
-
-    transform:translateY(-5px);
-
-    box-shadow:0 0 40px #00ffee88;
-}
-
-/* STATUS */
-
-.status{
-
-    margin-top:25px;
-
-    text-align:center;
-
-    font-size:1rem;
-
-    color:#00ffee;
-}
-
-/* FOOTER */
 
 .footer{
 
-    text-align:center;
+text-align:center;
 
-    opacity:0.6;
+margin-top:25px;
 
-    padding-bottom:40px;
+opacity:.6;
+
 }
 
-/* RESPONSIVE */
+@media(max-width:600px){
 
-@media(max-width:768px){
+.card{
 
-    .upload-card{
-        padding:35px 25px;
-    }
+padding:25px;
 
-    .upload-card h1{
-        font-size:2.5rem;
-    }
+}
 
-    .navbar{
+h1{
 
-        flex-direction:column;
+font-size:28px;
 
-        gap:20px;
-    }
+}
 
-    .nav-links{
-        gap:18px;
-    }
+.fileBox{
+
+padding:35px;
+
+}
 
 }
 
@@ -460,101 +306,64 @@ body::before{
 
 <body>
 
-<!-- CURSOR -->
-
-<div class="cursor"></div>
-
-<!-- PARTICLES -->
-
-<div class="particles">
-
-<span style="left:5%; top:90%; animation-duration:12s;"></span>
-
-<span style="left:15%; top:80%; animation-duration:15s;"></span>
-
-<span style="left:30%; top:95%; animation-duration:10s;"></span>
-
-<span style="left:45%; top:88%; animation-duration:17s;"></span>
-
-<span style="left:60%; top:92%; animation-duration:11s;"></span>
-
-<span style="left:75%; top:85%; animation-duration:16s;"></span>
-
-<span style="left:90%; top:95%; animation-duration:13s;"></span>
-
-</div>
-
 <div class="container">
 
-<!-- NAVBAR -->
-
-<div class="navbar">
-
-<div class="logo">
-⚡ NoteShare
-</div>
-
-<div class="nav-links">
-
-<a href="index.html">Home</a>
-
-<a href="upload.html">Upload</a>
-
-<a href="notes.html">Browse</a>
-
-</div>
-
-</div>
-
-<!-- HERO -->
-
-<div class="hero">
-
-<div class="upload-card">
+<div class="card">
 
 <h1>
-Upload Notes ⚡
+⚡ Upload Notes
 </h1>
 
 <p>
-Share your study materials with the futuristic NoteShare community.
+Share notes with NoteShare
 </p>
 
-<div id="clock"></div>
-
-<form id="uploadForm">
-
-<div class="input-box">
+<form
+id="uploadForm">
 
 <label>
+
 📘 Note Title
+
 </label>
 
 <input
-type="text"
 id="title"
-placeholder="Enter note title..."
 required>
-
-</div>
-
-<div class="input-box">
 
 <label>
+
 🧠 Subject
+
 </label>
 
 <input
-type="text"
 id="subject"
-placeholder="Enter subject..."
 required>
-
-</div>
 
 <div
-class="file-box"
-onclick="document.getElementById('pdf').click()">
+class="fileBox"
+onclick="pdf.click()">
+
+<div
+style="font-size:60px">
+
+📄
+
+</div>
+
+<h2>
+
+Click To Upload PDF
+
+</h2>
+
+<div
+id="fileName">
+
+No file selected
+
+</div>
 
 <input
 type="file"
@@ -562,159 +371,152 @@ id="pdf"
 accept=".pdf"
 required>
 
-<div style="font-size:3rem;">
-📄
 </div>
 
-<h3>
-Click to Upload PDF
-</h3>
-
-<div class="file-name" id="fileName">
-No file selected
-</div>
-
-</div>
-
-<button
-type="submit"
-class="upload-btn">
+<button>
 
 🚀 Upload Note
 
 </button>
 
-<div class="status" id="status"></div>
+<div
+id="status">
+
+</div>
 
 </form>
 
 </div>
 
-</div>
+<div
+class="footer">
 
-<div class="footer">
 Made with ⚡ by Sameer
+
 </div>
 
 </div>
 
 <script>
 
-/* CLOCK */
+const API=
 
-function updateClock(){
+"https://noteshare-o50k.onrender.com";
 
-const now = new Date();
+const pdf=
 
-const date = now.toLocaleDateString();
+document.getElementById(
+"pdf"
+);
 
-const time = now.toLocaleTimeString();
+pdf.addEventListener(
+"change",
+()=>{
 
-document.getElementById("clock").innerHTML =
-`${date} • ${time}`;
+const file=
 
-}
+pdf.files[0];
 
-setInterval(updateClock,1000);
+document.getElementById(
+"fileName"
+).innerHTML=
 
-updateClock();
+file?
 
-/* CURSOR */
+file.name:
 
-const cursor =
-document.querySelector(".cursor");
-
-document.addEventListener("mousemove",(e)=>{
-
-cursor.style.left =
-e.clientX + "px";
-
-cursor.style.top =
-e.clientY + "px";
-
-});
-
-/* FILE NAME */
-
-const pdfInput =
-document.getElementById("pdf");
-
-pdfInput.addEventListener("change",()=>{
-
-const file =
-pdfInput.files[0];
-
-if(file){
-
-document.getElementById("fileName").innerHTML =
-file.name;
+"No file selected";
 
 }
+);
 
-});
+document
+.getElementById(
+"uploadForm"
+)
 
-/* FORM */
+.addEventListener(
+"submit",
 
-document.getElementById("uploadForm")
-.addEventListener("submit",async(e)=>{
+async(e)=>{
 
 e.preventDefault();
 
-const title =
-document.getElementById("title").value;
+const status=
 
-const subject =
-document.getElementById("subject").value;
+document.getElementById(
+"status"
+);
 
-const pdf =
-document.getElementById("pdf").files[0];
+const formData=
 
-const formData =
 new FormData();
 
-formData.append("title",title);
+formData.append(
 
-formData.append("subject",subject);
+"title",
 
-formData.append("pdf",pdf);
+document
+.getElementById(
+"title"
+).value
 
-const status =
-document.getElementById("status");
+);
 
-status.innerHTML =
+formData.append(
+
+"subject",
+
+document
+.getElementById(
+"subject"
+).value
+
+);
+
+formData.append(
+
+"pdf",
+
+pdf.files[0]
+
+);
+
+status.innerHTML=
+
 "Uploading... ⚡";
 
 try{
 
-const API =
-"https://noteshare-o50k.onrender.com";
+const res=
 
-const res =
 await fetch(
 
 `${API}/upload-note`,
 
 {
+
 method:"POST",
+
 body:formData
+
 }
 
 );
 
-const data =
+const data=
+
 await res.json();
 
 if(!res.ok){
 
-throw new Error(
-data.error ||
-"Upload Failed"
-);
+throw new Error();
 
 }
 
-status.innerHTML =
-"✅ Note Uploaded Successfully";
+status.innerHTML=
+
+"✅ Uploaded Successfully";
 
 document
 .getElementById(
@@ -726,19 +528,26 @@ document
 .getElementById(
 "fileName"
 )
-innerHTML =
+innerHTML=
+
 "No file selected";
 
 }
-catch(err){
 
-console.log(err);
+catch{
 
-status.innerHTML =
+status.innerHTML=
+
 "❌ Upload Failed";
 
 }
+
+}
+
+);
+
 </script>
 
 </body>
+
 </html>
