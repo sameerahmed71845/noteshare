@@ -47,19 +47,35 @@ const storage = new CloudinaryStorage({
 
 cloudinary,
 
-params:{
+params:async(req,file)=>({
 
 folder:"notes",
 
-resource_type:"raw"
+resource_type:"raw",
 
-}
+public_id:
+
+Date.now()+"-"+
+
+file.originalname
+
+.replace(/\s+/g,"-")
+
+})
 
 });
 
 const upload = multer({
 
-storage
+storage,
+
+limits:{
+
+fileSize:
+
+20*1024*1024
+
+}
 
 });
 
@@ -137,7 +153,10 @@ title,
 
 subject,
 
-pdfUrl:req.file.path,
+pdfUrl:
+req.file.path
+||
+req.file.secure_url,
 
 fileName:req.file.originalname
 
