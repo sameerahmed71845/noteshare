@@ -219,7 +219,8 @@ document.getElementById(
 
 if(pdfUrl){
 
-viewer.src=pdfUrl;
+viewer.src =
+`https://mozilla.github.io/pdf.js/web/viewer.html?file=${encodeURIComponent(pdfUrl)}`;
 
 }else{
 
